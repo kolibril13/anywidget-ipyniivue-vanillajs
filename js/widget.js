@@ -2,21 +2,24 @@ import "./widget.css";
 
 import { Niivue } from "@niivue/niivue";
 
-export function render({ model, el }) {
-  const canvas = document.createElement("canvas");
-  canvas.id = "gl";
-  canvas.width = 800;
-  canvas.height = 800;
-
-  // Append the canvas to the element with id="app"
-  el.appendChild(canvas);
-
-  // Make an array of volumes to load
-  let volumeList = [
-    { url: "https://niivue.github.io/niivue-demo-images/mni152.nii.gz" },
-  ];
-
-  const nv = new Niivue({ isResizeCanvas: false });
-  nv.attachTo("gl"); // attach to canvas with id="gl"
+function myLoadVolumes(nv, canvas, url) {
+  let volumeList = [{ url: url }];
+  nv.attachToCanvas(canvas);
   nv.loadVolumes(volumeList);
+}
+
+export async function render({ model, el }) {
+  let canvas = document.createElement("canvas");
+  let container = document.createElement("div");
+  container.style.height = "300px";
+  container.appendChild(canvas);
+  el.appendChild(container);
+
+  let nv = new Niivue();
+
+  myLoadVolumes(nv, canvas, model.get("_my_volume_url"));
+
+  model.on("change:_my_volume_url", () => {
+    url = myLoadVolumes(nv, canvas, model.get("_my_volume_url"));
+  });
 }
