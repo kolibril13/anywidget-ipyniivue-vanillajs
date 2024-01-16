@@ -19,3 +19,7 @@ class AnyNiivue(anywidget.AnyWidget):
 
     def add_volume(self, new_value):
       self._my_volume_url = new_value
+
+class LoadLocalVolume(anywidget.AnyWidget):
+    _esm = pathlib.Path(__file__).parent / "static" / "load_local.js"
+    _css = pathlib.Path(__file__).parent / "static" / "load_local.css"
