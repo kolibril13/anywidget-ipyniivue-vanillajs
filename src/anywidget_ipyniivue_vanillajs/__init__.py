@@ -28,3 +28,7 @@ class LoadLocalVolume(anywidget.AnyWidget):
 class MeshLoader(anywidget.AnyWidget):
     _esm = pathlib.Path(__file__).parent / "static" / "mesh_loader.js"
     _css = pathlib.Path(__file__).parent / "static" / "mesh_loader.css"
+
+class UsingSlider(anywidget.AnyWidget):
+    _esm = pathlib.Path(__file__).parent / "static" / "using_slider.js"
+    # _css = pathlib.Path(__file__).parent / "static" / "using_slider.css"
