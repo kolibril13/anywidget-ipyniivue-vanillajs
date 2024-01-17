@@ -18,6 +18,6 @@ export async function render({ model, el }) {
     nv.attachToCanvas(canvas);
     let funcname = msg.func;
     let volumeList = msg.args;
-    nv.loadVolumes(volumeList);
+    nv[funcname](volumeList);
   });
 }
