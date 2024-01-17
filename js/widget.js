@@ -17,6 +17,7 @@ export async function render({ model, el }) {
 
   let nv = new Niivue();
 
+  
   myLoadVolumes(nv, canvas, model.get("_my_volume_url"));
 
   model.on("change:_my_volume_url", () => {

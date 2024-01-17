@@ -3,16 +3,14 @@ import "./widget.css";
 import { Niivue } from "@niivue/niivue";
 
 export async function render({ model, el }) {
-  const canvas = document.createElement("canvas");
-  canvas.width = 800;
-  canvas.height = 500;
-
   var label = document.createElement("label");
   label.setAttribute("for", "meshSlider");
   label.textContent = "Threshold";
   label.style.color = "white";
   label.style.fontSize = "25px";
-  // Create input
+
+  console.log("Trigger Hot Module Replacement");
+
   var input = document.createElement("input");
   input.setAttribute("type", "range");
   input.setAttribute("min", "1");
@@ -20,17 +18,25 @@ export async function render({ model, el }) {
   input.setAttribute("value", "20");
   input.setAttribute("class", "slider");
   input.setAttribute("id", "meshSlider");
-  input.style.width = "200px";
+  // input.style.width = "200px";
 
-  // Append elements to #app
+
+  const canvas = document.createElement("canvas");
+  // canvas.width = 800;
+  canvas.height = 500;
+
+  model.on("change:slider_value", () => {
+    input.value = model.get("slider_value");
+    nv1.setMeshLayerProperty(nv1.meshes[0].id, 0, "cal_min", input.value * 0.1);
+  });
+
   el.appendChild(label);
   el.appendChild(input);
+  el.appendChild(canvas);
 
   input.oninput = function () {
     nv1.setMeshLayerProperty(nv1.meshes[0].id, 0, "cal_min", this.value * 0.1);
   };
-
-  el.appendChild(canvas);
 
   var nv1 = new Niivue({
     show3Dcrosshair: true,
@@ -38,6 +44,7 @@ export async function render({ model, el }) {
   });
   nv1.setSliceType(nv1.sliceTypeRender);
   nv1.attachToCanvas(canvas);
+  
   nv1.opts.isColorbar = true;
   var meshLHLayersList1 = [
     {
