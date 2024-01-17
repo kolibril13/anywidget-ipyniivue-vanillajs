@@ -1,6 +1,7 @@
-// import "./widget.css";
+import "./widget.css";
 
 import { Niivue } from "@niivue/niivue";
+
 
 export async function render({ model, el }) {
   let canvas = document.createElement("canvas");
@@ -8,35 +9,12 @@ export async function render({ model, el }) {
   container.style.height = "300px";
   container.appendChild(canvas);
   el.appendChild(container);
+  let nv = new Niivue();
 
-  const nv = new Niivue();
-  nv.attchToCanvas(canvas);
-
-  let volumeList = [
-    {
-      url: "images/mni152.nii.gz",
-      colormap: "gray",
-      visible: true,
-      opacity: 1,
-    },
-    {
-      url: "images/hippo.nii.gz",
-      colormap: "green",
-      visible: true,
-      opacity: 1,
-    },
-  ];
-  nv.loadVolumes(volumeList);
-
-  // model.on("msg:custom", msg => {
-  //    if (msg.type !== "api") {
-  //      return; // not a an API call
-  //    }
-  //    if (typeof nv[msg.func] !== "function") {
-  //      throw new Error(`${msg.func} is not a exposed on Niivue API.`);
-  //    }
-  //    nv[msg.func](...msg.args);
-  // });
-
-  // el.appendChild(div);
+  console.log("Hello World!");
+  model.on("msg:custom", (msg) => {
+    console.log("Custom message received!");
+    console.log(msg.func);
+    console.log(msg.args);
+  });
 }
