@@ -2,7 +2,6 @@ import "./widget.css";
 
 import { Niivue } from "@niivue/niivue";
 
-
 export async function render({ model, el }) {
   let canvas = document.createElement("canvas");
   let container = document.createElement("div");
@@ -16,5 +15,9 @@ export async function render({ model, el }) {
     console.log("Custom message received!");
     console.log(msg.func);
     console.log(msg.args);
+    nv.attachToCanvas(canvas);
+    let funcname = msg.func;
+    let volumeList = msg.args;
+    nv.loadVolumes(volumeList);
   });
 }
