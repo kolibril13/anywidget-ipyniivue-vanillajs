@@ -46,3 +46,11 @@ class CustomSend(anywidget.AnyWidget):
     # _css = pathlib.Path(__file__).parent / "static" / "using_slider.css"
 
     slider_value = traitlets.Int(20).tag(sync=True)
+
+
+
+class AnyNiivURL(anywidget.AnyWidget):
+    _esm = pathlib.Path(__file__).parent / "static" / "minimal_from_url.js"
+    # _css = pathlib.Path(__file__).parent / "static" / "using_slider.css"
+
+    slider_value = traitlets.Int(20).tag(sync=True)
