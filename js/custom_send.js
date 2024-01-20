@@ -9,13 +9,13 @@ export async function render({ model, el }) {
   container.appendChild(canvas);
   el.appendChild(container);
   let nv = new Niivue();
+  nv.attachToCanvas(canvas);
 
   console.log("Hello World!");
   model.on("msg:custom", (msg) => {
     console.log("Custom message received!");
     console.log(msg.func);
     console.log(msg.args);
-    nv.attachToCanvas(canvas);
     let funcname = msg.func;
     nv[funcname]( ...msg.args);
   });
