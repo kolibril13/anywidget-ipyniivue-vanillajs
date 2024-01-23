@@ -25,9 +25,7 @@ class AnyNiivue(anywidget.AnyWidget):
 
       
 
-class LoadLocalVolume(anywidget.AnyWidget):
-    _esm = pathlib.Path(__file__).parent / "static" / "load_local.js"
-    _css = pathlib.Path(__file__).parent / "static" / "load_local.css"
+
 
 
 class MeshLoader(anywidget.AnyWidget):
