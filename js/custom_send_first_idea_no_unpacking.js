@@ -10,7 +10,13 @@ export async function render({ model, el }) {
   el.appendChild(container);
   let nv = new Niivue();
   nv.attachToCanvas(canvas);
-  nv.loadVolumes([
-    { url: "https://niivue.github.io/niivue/images/mni152.nii.gz" },
-  ]);
+
+  console.log("Hello World!");
+  model.on("msg:custom", (msg) => {
+    console.log("Custom message received!");
+    console.log(msg.func);
+    console.log(msg.args);
+    let funcname = msg.func;
+    nv[funcname](msg.args);
+  });
 }
